@@ -1,1 +1,51 @@
-gogogo
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Math</h2>
+
+<p>Math.floor(Math.random() * 10) returns a random integer between 0 and 9 (both 
+included):</p>
+
+<p>Number of Floors =<span id="demo"></span></p>
+<p>Number of branches =<span id="lemo"></span></p>
+
+<script>
+function dsix(){
+return Math.floor((3*(Math.random() * 10))/5)+1;}
+
+function dten(){
+return Math.floor (Math.random() * 10)+1;
+}
+
+var floors = dsix()+dsix()+dsix();
+var branch = dten();
+var bri2  = bran(branch);
+
+function bran(level){
+	var bri=1;
+	while (level >= 7){
+		bri=bri+1;
+		level = dten();
+   }
+	return bri
+}
+function pasz(icon, dv) {
+    this.icon = icon;
+    this.dv = dv;
+}
+function filz(icon, dv) {
+    this.icon = icon;
+    this.dv = dv;
+}
+function conode(icon, dv) {
+    this.icon = icon;
+    this.dv = dv;
+}
+
+document.getElementById("demo").innerHTML = floors;
+document.getElementById("lemo").innerHTML = bri2
+</script>
+
+</body>
+</html>
