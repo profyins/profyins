@@ -125,7 +125,8 @@ class Narc {
         this.diffculty = diffculty;
         this.rooms = [];
         this.links = [];
-
+        this.root = {};
+        
         for (var i = 0; i < numRooms; i++) {
             if (i == 0 || i == 1) {
                 this.rooms[i] = new LobbyRoom(diffculty, i);
@@ -135,7 +136,7 @@ class Narc {
             }
 
         }
-        
+
         this.__connectRooms();
     }
     populate() {
@@ -146,45 +147,116 @@ class Narc {
         }
     }
     __connectRooms() {
-
+        ////////////////////////////////////////////////////////////////////////////
+        // determine how many branches
+        // 1 branch is one single long netarch
+        ////////////////////////////////////////////////////////////////////////////
         var branches = 1;
-        var roll = dice(1,10);
-        while(roll >= 7){
+        var roll = dice(1, 10);
+        while (roll >= 7) {
             branches++;
-            roll = dice(1,10);
+            roll = dice(1, 10);
         }
 
-        //branch 2, rooms 11
+        ////////////////////////////////////////////////////////////////////////////
+        //determine how short that the longest branch can be
+        //hopefully this allows longer side branches
+        //all netarchs start with the first 3 rooms 
+        ////////////////////////////////////////////////////////////////////////////
         var prefix = 3;
-        var branchableRooms = this.rooms.length - prefix;//8
-        var branchLength = Math.floor(branchableRooms/branches);//4
-        var longestBranch = branchLength;//4
-        var remainder = branchableRooms % branches;//0
-
-        if(branches > 1 && remainder == 0){
+        //after the first 3 rooms other rooms can be on any branch
+        var branchableRooms = this.rooms.length - prefix;
+        //average branch length if branches are equal size
+        var branchLength = Math.floor(branchableRooms / branches);
+        var longestBranch = branchLength;
+        //determine how many rooms are left over after making equal size branches
+        var remainder = branchableRooms % branches;
+        if (branches > 1 && remainder == 0) {
+            //if no remainder then 'steal' a room from a side branch 
+            //and add it to main branch to make main branch the longest
             longestBranch += 1;//5
         }
-        else{
+        else {
+            //if there is a remainder add the rooms to the main branch to make it longest
             longestBranch += remainder;
         }
-        
+
         console.log(`rooms ${this.rooms.length}, branches: ${branches}, longestBranch: ${longestBranch}, branchLength ${branchLength}`)
 
+        ////////////////////////////////////////////////////////////////////////////
+        //create the main branch of the desired length prefix plus longest branch
+        ////////////////////////////////////////////////////////////////////////////
+        let mainBranch = [this.rooms[0]];
         for (let index = 1; index < (prefix + longestBranch); index++) {
-            this.links[index-1] = { source: index-1, target: index };
+            this.links[index - 1] = { source: index - 1, target: index };
+            mainBranch.push(this.rooms[index]);
         }
+        //////////////////////////////////////////////////////////////////////////
+        //the root is always the last room in the mainBranch
+        //////////////////////////////////////////////////////////////////////////
+        this.root = mainBranch[mainBranch.length-1];
 
+        ////////////////////////////////////////////////////////////////////////////
+        //for the side branches, create them now 
+        //as separate chains of connected rooms
+        ////////////////////////////////////////////////////////////////////////////
         var remainingBranches = branches - 1;
         var remainderBranches = [];
-        for (let x = 0; x < remainingBranches; x++) {
-            
+        let roomIndex = (prefix + longestBranch);
+        
+        //loop over remaining branches
+        for (let r = 0; r < remainingBranches; r++) {
+            remainderBranches[r] = [];
+            //loop to try to create equal sized side branch of branchLength
+            for (let b = 0; b < branchLength; b++) {
+                //because we 'steal' rooms from side branches
+                //we have to always check that we havent run out of rooms
+                if(roomIndex < this.rooms.length){
+                    //add room to current side branch
+                    remainderBranches[r].push(this.rooms[roomIndex]);
+                    //current room is assigned to branch
+                    //some increment roomIndex, so we have 1 less rooms left to assign to side branches
+                    roomIndex++;
+                    if(b > 0){
+                        //if this isnt the first room of a side branch
+                        //we can add link to connect it to the end of the side branch
+                        let previousId = remainderBranches[r][b-1].id;
+                        let currentId = remainderBranches[r][b].id;
+                        this.links.push({ source: previousId, target: currentId}); 
+                    }
+                }
+            }
         }
 
-        // for (let index = 0; index < this.rooms.length; index++) {
-        //     if (index > 0) {
-        //         this.links[index - 1] = { source: index - 1, target: index };
-        //     }
-        // }
+        ////////////////////////////////////////////////////////////////////////////
+        //for each side branch determine all the locations
+        //where we can attach it to the main branch
+        //while ensuring attaching it doesnt make a new longest branch
+        //then randomly attach the sidebranch to the main branch at a valid location
+        ////////////////////////////////////////////////////////////////////////////
+        for (let r = 0; r < remainderBranches.length; r++) {
+            const sideBranch = remainderBranches[r];
+            const attachableRoomIndexs = [];
+            //loop from 3rd room in main branch to determine where we can attach this sidebranch
+            for (let i = 2; i < mainBranch.length; i++){
+                //add 1 to zero based index to get length of current segment of main branch
+                //then add sidebranch length to determine total sidebranch length
+                let sideBranchLength = (i + 1) + sideBranch.length;
+                if(sideBranchLength < (prefix + longestBranch)){
+                   attachableRoomIndexs.push(i);
+                }
+            }
+            //randomly 'roll' to determine which valid room
+            //on mainbranch to attach sidebranch to
+            let optionCount = attachableRoomIndexs.length;
+            if(optionCount == 0){ continue; }
+            let randomOptionIndex = dice(1,optionCount) - 1;
+            let selectedRoomIndex  = attachableRoomIndexs[randomOptionIndex];
+            //attach the first room in sidebranch to the valid room in mainbranch
+            let attachSourceId = mainBranch[selectedRoomIndex].id;
+            let attachTargetId = sideBranch[0].id;
+            this.links.push({ source: attachSourceId, target: attachTargetId }); 
+        }
     }
 }
 
