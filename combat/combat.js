@@ -28,12 +28,12 @@ var specialstuf={
 }
 
 function popweapons() {
-    for (var integer=0; integer < weapons.length;intger++);{
+    for (var integer=0; integer < weapons.length;integer++);{
         document.getElementById("arm1").innerHTML +='<div class="weapon" id=weap"'+integer+'"style="background-image: url('+weapons[integer].imag +') "><p class="type">'+weapons[integer].type+ '</p></div>';
     }
 }
 function teste(){
-    document.getElementsByClassName(weapons).innerHTML+="yo";
+    document.getElementsByClassName("weapons").innerHTML+="yo";
 
 }
 
