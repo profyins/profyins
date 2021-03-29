@@ -1,0 +1,145 @@
+img{
+border: 2px solid red;
+border-right: 15px solid red;
+Padding: 10px,10px,10px;
+margin-right: 5px;
+}
+
+
+body {
+margin:4%;
+  font-family: 'Teko';
+  font-size: 18px;
+
+  border-right: solid 1px red;
+    box-shadow: 0 0 1px #fff inset; 
+  margin: 20px;
+  padding: 20px;
+  
+
+    top: 0;
+    left:0;
+    right: 60%;
+	bottom: 80%;
+    border-top: 4px solid red;
+    border-left: 4px solid red;  
+
+}
+  .header{
+vertical-align: top;
+  
+
+height: 70px;
+  float: right;
+position:relative;
+  
+  right: -20px;
+   background: red;
+  padding: 10px;
+
+  color: white;  
+  font-size:36px;
+  
+  clip-path: 
+    polygon(
+      0% 20%,     /* top left */
+      4% 0%,     /* top left */
+      100% 0%,    /* top right */
+      100% 0%,   /* top right */
+      100% 100%,  /* bottom right */
+      0% 100%,  /* bottom right */
+      0% 100%,   /* bottom left */
+      0% 100%      /* bottom left */
+    );
+  
+  
+  
+  
+  
+  }
+  h5{font-size:20px;}
+  h4{font-size:26px;}
+  .pane {
+  border: solid 1px #aaa;
+  box-shadow:0 0 1px #fff inset; 
+  padding: 10px;
+  float: Right;
+  }
+.clear{clear: both;}
+  Table {
+  
+  border: 1px solid red;
+  }
+  th{
+  
+  background-color: red;
+  color: white;
+  }
+  td{border: 1px solid red}
+
+  .legal {color : blue;
+font-size: small;}
+.netcom{
+    border: 1px solid red;
+    float:left;
+}
+.red {
+    background-color: red;
+    color: white;
+}
+.ored {
+  background-color: orangered;
+  color: white;
+}
+.armory0{
+  border: solid orangered 2px;
+  width:45%;
+  float: right;
+  
+
+}
+.armory {
+  border: solid orangered 6px;
+  width: 96%;
+  padding: 4px;
+  float:left;
+
+}
+.weapon {
+    background-image: url(smg2.svg);
+    border:2px solid orange;
+    height:70px;
+    width:70px;
+    margin-top:2px;
+    margin-right:2px;
+    background-color: orange;
+    color: white;
+    float:left;
+
+
+}
+
+.rweapon {
+  border:2px solid orange;
+  height:70px;
+  width:70px;
+  margin-top:2px;
+  margin-right:2px;
+  
+
+
+}.weapon {
+  border:2px solid orange;
+  height:70px;
+  width:70px;
+  margin-top:2px;
+  margin-right:2px;
+  float:left;
+
+
+}
+.range {
+  text-align: center;
+  float:right;
+
+}
