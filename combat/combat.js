@@ -2,17 +2,17 @@ var pistol={type:"pistol", imag:"pisto1.svg", range1:13, range2:15, range3:20, r
 }
 var smg={type:"smg", imag:"smag2.svg",range1:15, range2:13, range3:15, range4:20, range5:25, range6:25, range7:30, range8:"NA"
 }
-var shotgunslug={type:"shotgun(slug)", range1:13, range2:15, range3:20, range4:25, range5:30, range6:35, range7:"NA", range8:"NA"
+var shotgunslug={type:"shotgun(slug)", imag:"pisto1.svg", range1:13, range2:15, range3:20, range4:25, range5:30, range6:35, range7:"NA", range8:"NA"
 }
-var assault={type:"assault rifle", range1:17, range2:16, range3:15, range4:13, range5:15, range6:20, range7:25, range8:30
+var assault={type:"assault rifle", imag:"pisto1.svg",range1:17, range2:16, range3:15, range4:13, range5:15, range6:20, range7:25, range8:30
 }
-var sniper={type:"sniper rifle", range1:30, range2:25, range3:25, range4:20, range5:15, range6:16, range7:17, range8:20
+var sniper={type:"sniper rifle", imag:"pisto1.svg",range1:30, range2:25, range3:25, range4:20, range5:15, range6:16, range7:17, range8:20
 }
-var archery={type:"bow and xbow", range1:15, range2:13, range3:15, range4:17, range5:20, range6:22, range7:25, range8:"NA"
+var archery={type:"bow and xbow", imag:"pisto1.svg",range1:15, range2:13, range3:15, range4:17, range5:20, range6:22, range7:25, range8:"NA"
 }
-var grenade={type:"grenade", range1:16, range2:15, range3:15, range4:17, range5:20, range6:22, range7:25, range8:"NA"
+var grenade={type:"grenade", imag:"pisto1.svg",range1:16, range2:15, range3:15, range4:17, range5:20, range6:22, range7:25, range8:"NA"
 }
-var launcher={type:"rocket launcher", range1:13, range2:15, range3:20, range4:25, range5:30, range6:30, range7:"NA", range8:"NA"
+var launcher={type:"rocket launcher", imag:"pisto1.svg",range1:13, range2:15, range3:20, range4:25, range5:30, range6:30, range7:"NA", range8:"NA"
 }
 var weapons=[pistol,smg,shotgunslug,assault,sniper,archery,grenade,launcher]
 
@@ -28,14 +28,12 @@ var specialstuf={
 }
 
 function popweapons() {
-    for (var integer=0; integer < weapons.length;integer++);{
-        document.getElementById("arm1").innerHTML +='<div class="weapon" id=weap"'+integer+'"style="background-image: url('+weapons[integer].imag +') "><p class="type">'+weapons[integer].type+ '</p></div>';
+    var popo;
+    for (var i=0; i<weapons.length-1;i++);{
+        popo +='<div class="weapon" id=weap'+i+' style="background-image: url('+weapons[i].imag +')"><p class="type">'+weapons[i].type+ '</p></div>';
+        document.getElementById("arm1").innerHTML += '<div class="weapon" id=weap'+i+' style="background-image: url('+weapons[i].imag +')"><p class="type">'+weapons[i].type+ '</p></div>';
     }
-}
-function teste(){
-    document.getElementsByClassName("weapons").innerHTML+="yo";
-
+    document.getElementById("lop").innerText+=popo;
 }
 
-teste();
 popweapons();
