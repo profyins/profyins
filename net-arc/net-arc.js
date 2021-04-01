@@ -126,7 +126,7 @@ class Narc {
         this.rooms = [];
         this.links = [];
         this.root = {};
-        
+
         for (var i = 0; i < numRooms; i++) {
             if (i == 0 || i == 1) {
                 this.rooms[i] = new LobbyRoom(diffculty, i);
@@ -236,6 +236,8 @@ class Narc {
         ////////////////////////////////////////////////////////////////////////////
         for (let r = 0; r < remainderBranches.length; r++) {
             const sideBranch = remainderBranches[r];
+            //sometimes sideBranch is allocated but we run out of rooms before its populated
+            if(sideBranch.length == 0){ continue; }
             const attachableRoomIndexs = [];
             //loop from 3rd room in main branch to determine where we can attach this sidebranch
             for (let i = 2; i < mainBranch.length; i++){
@@ -249,6 +251,7 @@ class Narc {
             //randomly 'roll' to determine which valid room
             //on mainbranch to attach sidebranch to
             let optionCount = attachableRoomIndexs.length;
+            //sometimes there is nowhere you can attach branch??? seems like should be impossible could be bug
             if(optionCount == 0){ continue; }
             let randomOptionIndex = dice(1,optionCount) - 1;
             let selectedRoomIndex  = attachableRoomIndexs[randomOptionIndex];

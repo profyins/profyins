@@ -77,13 +77,14 @@ function renderData(data) {
         .attr("marker-end", d => `url(${new URL(`#arrow-${d.type}`, location)})`);
 
     const node = svg.append("g")
+        .attr("id", function(d){ return d.id })
         .attr("fill", "currentColor")
         .attr("stroke-linecap", "round")
         .attr("stroke-linejoin", "round")
         .selectAll("g")
         .data(data.nodes)
         .join("g")
-        .call(drag(simulation));
+        .call(drag(simulation))
 
     var clipPaths = node.append("clipPath")
         .attr("id", function (d) { return "clip-circle-" + d.id })
@@ -97,7 +98,7 @@ function renderData(data) {
         .attr("clip-path", function (d) { return "url(#clip-circle-" + d.id + ")" })
         .attr("width", function (d) { return d.landscape ? null : 100 })
         .attr("height", function (d) { return d.landscape ? 100 : null });
-
+ 
     node.append("text")
         .attr("x", 50 + 4)
         .attr("y", "0.31em")
@@ -107,3 +108,12 @@ function renderData(data) {
         .attr("stroke", "white")
         .attr("stroke-width", 3);
 }
+
+<g fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(202.1400543449705,-97.67193759389193)">
+        <text x="54" y="0.31em" fill="none" stroke="white" stroke-width="3">Room:0</text>
+        <clipPath id="clip-circle-0"><circle r="50"></circle></clipPath>
+        <image xlink:href="/psycho.png" x="-50" y="-50" clip-path="url(#clip-circle-0)" width="100"></image>
+        <text x="54" y="0.31em">Room:0</text>
+    </g>
+</g>  
