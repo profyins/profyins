@@ -108,12 +108,3 @@ function renderData(data) {
         .attr("stroke", "white")
         .attr("stroke-width", 3);
 }
-
-<g fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
-    <g transform="translate(202.1400543449705,-97.67193759389193)">
-        <text x="54" y="0.31em" fill="none" stroke="white" stroke-width="3">Room:0</text>
-        <clipPath id="clip-circle-0"><circle r="50"></circle></clipPath>
-        <image xlink:href="/psycho.png" x="-50" y="-50" clip-path="url(#clip-circle-0)" width="100"></image>
-        <text x="54" y="0.31em">Room:0</text>
-    </g>
-</g>  
