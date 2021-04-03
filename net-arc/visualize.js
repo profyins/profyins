@@ -2,6 +2,15 @@
 function renderData(data) {
     console.log(data);
 
+    const legend = {
+        'lobby':'/net-arc/images/lobby.svg',
+        'file':'/net-arc/images/file.svg',
+        'password':'/net-arc/images/password.svg',
+        'control':'/net-arc/images/control.svg',
+        'ice':'/net-arc/images/ice.svg',
+        'root':'/net-arc/images/root.svg'
+    }
+
     var width = 1500,
         height = 1500;
 
@@ -92,32 +101,41 @@ function renderData(data) {
         .attr("r", 50)
         .attr("fill", d => nodeColor(d.type));
 
-    var setEvents = circles
-        .on('mouseenter', function() {
-            // select element in current context
-            d3.select( this )
-              .transition()
-              .attr("r", 100);
-          })
-        .on('mouseleave', function() {
-            d3.select( this )
-              .transition()
-              .attr("r", 50);
-          });
-
-    // var clipPaths = node.append("clipPath")
+       // var clipPaths = node.append("clipPath")
     //     .attr("id", function (d) { return "clip-circle-" + d.id })
     //     .append("circle")
     //     .attr("r", 50);
 
-    // var images = node.append("svg:image")
-    //     .attr("xlink:href", function (d) { return d.img; })
-    //     .attr("x", function (d) { return -50; })
-    //     .attr("y", function (d) { return -50; })
-    //     .attr("clip-path", function (d) { return "url(#clip-circle-" + d.id + ")" })
-    //     .attr("width", function (d) { return d.landscape ? null : 100 })
-    //     .attr("height", function (d) { return d.landscape ? 100 : null });
- 
+    var images = node.append("svg:image")
+        .attr("xlink:href", function (d) { return legend[d.type]; })
+        .attr("x", function (d) { return -50; })
+        .attr("y", function (d) { return -50; })
+        .attr("width", 100)
+        .attr("height", 100)
+        // .attr("clip-path", function (d) { return "url(#clip-circle-" + d.id + ")" })
+        //.attr("width", function (d) { return d.landscape ? null : 100 })
+        //.attr("height", function (d) { return d.landscape ? 100 : null });
+
+    var setEvents = images
+        .on('mouseenter', function() {
+            // select element in current context
+            d3.select( this )
+              .transition()
+              .attr("x", -100)
+              .attr("y", -100)
+              .attr("width", 200)
+              .attr("height", 200);
+          })
+        .on('mouseleave', function() {
+            d3.select( this )
+              .transition()
+              .attr("x", -50)
+              .attr("y", -50)
+              .attr("width", 100)
+              .attr("height", 100)
+          });
+
+
     node.append("text")
         .attr("x", 50 + 4)
         .attr("y", "0.31em")

@@ -236,20 +236,20 @@ class Narc {
     __classifyRooms(){
         for (var i = 0; i < this.rooms.length; i++){
             const room = this.rooms[i];
-            
-            if(i == 0) {
-                room.type = 'lobby'
+
+            if(room == this.root) { 
+                room.type = 'root'
             }
-            else if(i == 1){
-                room.type = 'vestibule'
+            else if(i == 0) {
+                room.type = 'lobby'
             }
             else {
                 if(room.contents.filter(c => c.type == 'password').length){
                     room.type = 'password'
                 }else if(room.contents.filter(c => c.type == 'file').length){
                     room.type = 'file'
-                }else if(room.contents.filter(c => c.type == 'console').length){
-                    room.type = 'console'
+                }else if(room.contents.filter(c => c.type == 'control').length){
+                    room.type = 'control'
                 }else{
                     room.type = 'ice'
                 }
