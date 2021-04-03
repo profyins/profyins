@@ -3,7 +3,7 @@ function renderData(data) {
     console.log(data);
 
     const legend = {
-        'lobby':'/net-arc/images/lobby.svg',
+        'lobby':'./images/lobby.svg',
         'file':'/net-arc/images/file.svg',
         'password':'/net-arc/images/password.svg',
         'control':'/net-arc/images/control.svg',
