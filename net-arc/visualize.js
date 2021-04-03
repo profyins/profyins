@@ -4,11 +4,11 @@ function renderData(data) {
 
     const legend = {
         'lobby':'./images/lobby.svg',
-        'file':'/net-arc/images/file.svg',
-        'password':'/net-arc/images/password.svg',
-        'control':'/net-arc/images/control.svg',
-        'ice':'/net-arc/images/ice.svg',
-        'root':'/net-arc/images/root.svg'
+        'file':'./images/file.svg',
+        'password':'./images/password.svg',
+        'control':'./images/control.svg',
+        'ice':'./images/ice.svg',
+        'root':'./images/root.svg'
     }
 
     var width = 1500,
