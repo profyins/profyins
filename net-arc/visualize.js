@@ -77,13 +77,14 @@ function renderData(data) {
         .attr("marker-end", d => `url(${new URL(`#arrow-${d.type}`, location)})`);
 
     const node = svg.append("g")
+        .attr("id", function(d){ return d.id })
         .attr("fill", "currentColor")
         .attr("stroke-linecap", "round")
         .attr("stroke-linejoin", "round")
         .selectAll("g")
         .data(data.nodes)
         .join("g")
-        .call(drag(simulation));
+        .call(drag(simulation))
 
     var clipPaths = node.append("clipPath")
         .attr("id", function (d) { return "clip-circle-" + d.id })
@@ -97,7 +98,7 @@ function renderData(data) {
         .attr("clip-path", function (d) { return "url(#clip-circle-" + d.id + ")" })
         .attr("width", function (d) { return d.landscape ? null : 100 })
         .attr("height", function (d) { return d.landscape ? 100 : null });
-
+ 
     node.append("text")
         .attr("x", 50 + 4)
         .attr("y", "0.31em")
