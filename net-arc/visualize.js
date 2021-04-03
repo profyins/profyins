@@ -21,7 +21,7 @@ function renderData(data) {
         .force("charge", d3.forceManyBody().strength(-300))
         .force("x", d3.forceX())
         .force("y", d3.forceY())
-        .force('collide', d3.forceCollide(d => 65))
+        .force('collide', d3.forceCollide(d => 130))
 
     simulation.on("tick", () => {
         link.attr("d", linkArc);
@@ -77,14 +77,17 @@ function renderData(data) {
         .attr("marker-end", d => `url(${new URL(`#arrow-${d.type}`, location)})`);
 
     const node = svg.append("g")
+        .selectAll("g")
+        .data(data.nodes)
+        .join("g")
         .attr("id", function(d){ return d.id })
         .attr("fill", "currentColor")
         .attr("stroke-linecap", "round")
         .attr("stroke-linejoin", "round")
-        .selectAll("g")
-        .data(data.nodes)
-        .join("g")
-        .call(drag(simulation))
+        .call(drag(simulation));
+
+    var circles = node.append("circle")
+        .attr("r", 75);
 
     var clipPaths = node.append("clipPath")
         .attr("id", function (d) { return "clip-circle-" + d.id })
