@@ -17,7 +17,8 @@ function formatData(data) {
             name: "Room:"+node.id,
             img: "/psycho.png",
             landscape: false,
-            contents: node.contents
+            contents: node.contents,
+            type: node.type 
         })
     }
 

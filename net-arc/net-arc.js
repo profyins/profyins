@@ -1,8 +1,8 @@
 var tables = {
     lobby: {
         1: [{ type: "file", dv: 6 }],
-        2: [{ type: "pass", dv: 6 }],
-        3: [{ type: "pass", dv: 8 }],
+        2: [{ type: "password", dv: 6 }],
+        3: [{ type: "password", dv: 8 }],
         4: [{ type: "skunk" }],
         5: [{ type: "wisp" }],
         6: [{ type: "killer" }],
@@ -14,10 +14,10 @@ var tables = {
         6: [{ type: "hellhound" }],
         7: [{ type: "wisp" }],
         8: [{ type: "raven" }],
-        9: [{ type: "pass", dv: 6 }],
+        9: [{ type: "password", dv: 6 }],
         10: [{ type: "file", dv: 6 }],
         11: [{ type: "control", dv: 6 }],
-        12: [{ type: "pass", dv: 6 }],
+        12: [{ type: "password", dv: 6 }],
         13: [{ type: "skunk" }],
         14: [{ type: "asp" }],
         15: [{ type: "scorpian" }],
@@ -32,10 +32,10 @@ var tables = {
         6: [{ type: "hellhound" }],
         7: [{ type: "wisp" }],
         8: [{ type: "raven" }],
-        9: [{ type: "pass", dv: 6 }],
+        9: [{ type: "password", dv: 6 }],
         10: [{ type: "file", dv: 6 }],
         11: [{ type: "control", dv: 6 }],
-        12: [{ type: "pass", dv: 6 }],
+        12: [{ type: "password", dv: 6 }],
         13: [{ type: "skunk" }],
         14: [{ type: "asp" }],
         15: [{ type: "scorpian" }],
@@ -50,10 +50,10 @@ var tables = {
         6: [{ type: "hellhound" }],
         7: [{ type: "wisp" }],
         8: [{ type: "raven" }],
-        9: [{ type: "pass", dv: 6 }],
+        9: [{ type: "password", dv: 6 }],
         10: [{ type: "file", dv: 6 }],
         11: [{ type: "control", dv: 6 }],
-        12: [{ type: "pass", dv: 6 }],
+        12: [{ type: "password", dv: 6 }],
         13: [{ type: "skunk" }],
         14: [{ type: "asp" }],
         15: [{ type: "scorpian" }],
@@ -68,10 +68,10 @@ var tables = {
         6: [{ type: "hellhound" }],
         7: [{ type: "wisp" }],
         8: [{ type: "raven" }],
-        9: [{ type: "pass", dv: 6 }],
+        9: [{ type: "password", dv: 6 }],
         10: [{ type: "file", dv: 6 }],
         11: [{ type: "control", dv: 6 }],
-        12: [{ type: "pass", dv: 6 }],
+        12: [{ type: "password", dv: 6 }],
         13: [{ type: "skunk" }],
         14: [{ type: "asp" }],
         15: [{ type: "scorpian" }],
@@ -116,36 +116,7 @@ class LobbyRoom extends Room {
 }
 
 class Narc {
-    constructor(diffculty, numRooms) {
 
-        if (!numRooms) {
-            var numRooms = dice(3, 6)
-        }
-
-        this.diffculty = diffculty;
-        this.rooms = [];
-        this.links = [];
-        this.root = {};
-
-        for (var i = 0; i < numRooms; i++) {
-            if (i == 0 || i == 1) {
-                this.rooms[i] = new LobbyRoom(diffculty, i);
-            }
-            else {
-                this.rooms[i] = new Room(diffculty, i);
-            }
-
-        }
-
-        this.__connectRooms();
-    }
-    populate() {
-        var already = { lobby: {}, basic: {}, standard: {}, uncommon: {}, advanced: {} };
-        for (var i = 0; i < this.rooms.length; i++) {
-            this.rooms[i].populate(already);
-
-        }
-    }
     __connectRooms() {
         ////////////////////////////////////////////////////////////////////////////
         // determine how many branches
@@ -261,6 +232,62 @@ class Narc {
             this.links.push({ source: attachSourceId, target: attachTargetId }); 
         }
     }
+
+    __classifyRooms(){
+        for (var i = 0; i < this.rooms.length; i++){
+            const room = this.rooms[i];
+
+            if(room == this.root) { 
+                room.type = 'root'
+            }
+            else if(i == 0) {
+                room.type = 'lobby'
+            }
+            else {
+                if(room.contents.filter(c => c.type == 'password').length){
+                    room.type = 'password'
+                }else if(room.contents.filter(c => c.type == 'file').length){
+                    room.type = 'file'
+                }else if(room.contents.filter(c => c.type == 'control').length){
+                    room.type = 'control'
+                }else{
+                    room.type = 'ice'
+                }
+            }
+        }
+    }
+
+    constructor(diffculty, numRooms) {
+
+        if (!numRooms) {
+            var numRooms = dice(3, 6)
+        }
+
+        this.diffculty = diffculty;
+        this.rooms = [];
+        this.links = [];
+        this.root = {};
+
+        for (var i = 0; i < numRooms; i++) {
+            if (i == 0 || i == 1) {
+                this.rooms[i] = new LobbyRoom(diffculty, i);
+            }
+            else {
+                this.rooms[i] = new Room(diffculty, i);
+            }
+
+        }
+
+        this.__connectRooms();
+    }
+    populate() {
+        var already = { lobby: {}, basic: {}, standard: {}, uncommon: {}, advanced: {} };
+        for (var i = 0; i < this.rooms.length; i++) {
+            this.rooms[i].populate(already);
+
+        }
+        this.__classifyRooms();
+    } 
 }
 
 function rollContents(alreadyRolled, tableName, numDice) {

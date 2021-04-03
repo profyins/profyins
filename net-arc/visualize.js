@@ -2,6 +2,15 @@
 function renderData(data) {
     console.log(data);
 
+    const legend = {
+        'lobby':'./images/lobby.svg',
+        'file':'./images/file.svg',
+        'password':'./images/password.svg',
+        'control':'./images/control.svg',
+        'ice':'./images/ice.svg',
+        'root':'./images/root.svg'
+    }
+
     var width = 1500,
         height = 1500;
 
@@ -10,9 +19,11 @@ function renderData(data) {
     var svg = d3.select("main .graph").append("svg")
         .attr("viewBox", [-width / 2, -height / 2, width, height])
 
-    var types = Array.from(new Set(data.links.map(d => d.type)))
+    var linkTypes = Array.from(new Set(data.links.map(d => d.type)));
+    var nodeTypes = Array.from(new Set(data.nodes.map(d => d.type)));
 
-    var color = d3.scaleOrdinal(types, d3.schemeCategory10)
+    var linkColor = d3.scaleOrdinal(linkTypes, d3.schemeCategory10)
+    var nodeColor = d3.scaleOrdinal(nodeTypes, d3.schemeCategory10)
 
     var linkArc = d => `M${d.source.x},${d.source.y}A0,0 0 0,1 ${d.target.x},${d.target.y}`
 
@@ -54,7 +65,7 @@ function renderData(data) {
     }
 
     svg.append("defs").selectAll("marker")
-        .data(types)
+        .data(linkTypes)
         .join("marker")
         .attr("id", d => `arrow-${d}`)
         .attr("viewBox", "0 -5 10 10")
@@ -64,7 +75,7 @@ function renderData(data) {
         .attr("markerHeight", 6)
         .attr("orient", "auto")
         .append("path")
-        .attr("fill", color)
+        .attr("fill", linkColor)
         .attr("d", 'M0,-5L10,0L0,5');
 
     const link = svg.append("g")
@@ -73,7 +84,7 @@ function renderData(data) {
         .selectAll("path")
         .data(data.links)
         .join("path")
-        .attr("stroke", d => color(d.type))
+        .attr("stroke", d => linkColor(d.type))
         .attr("marker-end", d => `url(${new URL(`#arrow-${d.type}`, location)})`);
 
     const node = svg.append("g")
@@ -81,31 +92,54 @@ function renderData(data) {
         .data(data.nodes)
         .join("g")
         .attr("id", function(d){ return d.id })
-        .attr("fill", "currentColor")
+        .attr("fill", nodeColor)
         .attr("stroke-linecap", "round")
         .attr("stroke-linejoin", "round")
         .call(drag(simulation));
 
     var circles = node.append("circle")
-        .attr("r", 75);
+        .attr("r", 50)
+        .attr("fill", d => nodeColor(d.type));
 
-    var clipPaths = node.append("clipPath")
-        .attr("id", function (d) { return "clip-circle-" + d.id })
-        .append("circle")
-        .attr("r", 50);
+       // var clipPaths = node.append("clipPath")
+    //     .attr("id", function (d) { return "clip-circle-" + d.id })
+    //     .append("circle")
+    //     .attr("r", 50);
 
     var images = node.append("svg:image")
-        .attr("xlink:href", function (d) { return d.img; })
+        .attr("xlink:href", function (d) { return legend[d.type]; })
         .attr("x", function (d) { return -50; })
         .attr("y", function (d) { return -50; })
-        .attr("clip-path", function (d) { return "url(#clip-circle-" + d.id + ")" })
-        .attr("width", function (d) { return d.landscape ? null : 100 })
-        .attr("height", function (d) { return d.landscape ? 100 : null });
- 
+        .attr("width", 100)
+        .attr("height", 100)
+        // .attr("clip-path", function (d) { return "url(#clip-circle-" + d.id + ")" })
+        //.attr("width", function (d) { return d.landscape ? null : 100 })
+        //.attr("height", function (d) { return d.landscape ? 100 : null });
+
+    var setEvents = images
+        .on('mouseenter', function() {
+            // select element in current context
+            d3.select( this )
+              .transition()
+              .attr("x", -100)
+              .attr("y", -100)
+              .attr("width", 200)
+              .attr("height", 200);
+          })
+        .on('mouseleave', function() {
+            d3.select( this )
+              .transition()
+              .attr("x", -50)
+              .attr("y", -50)
+              .attr("width", 100)
+              .attr("height", 100)
+          });
+
+
     node.append("text")
         .attr("x", 50 + 4)
         .attr("y", "0.31em")
-        .text(d => d.name)
+        .text(d => d.type)
         .clone(true).lower()
         .attr("fill", "none")
         .attr("stroke", "white")
