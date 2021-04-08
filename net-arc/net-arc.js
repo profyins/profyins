@@ -245,7 +245,7 @@ class Narc {
             //sometimes sideBranch is allocated but we run out of rooms before its populated
             if(sideBranch.length == 0){ continue; }
             //last node in a branch is always a leaf
-            sideBranch[sideBranch.length].isLeaf = true;
+            sideBranch[sideBranch.length - 1].isLeaf = true;
             const attachableRoomIndexs = [];
             //loop from 3rd room in main branch to determine where we can attach this sidebranch
             for (let i = 2; i < mainBranch.length; i++){
