@@ -39,7 +39,7 @@ function prog(name, icon, type, per, spd, atk, def, rez, eff) {
  var killer=new prog("killer","kllr.png","antiprog",4,8,6,2,20,"4d6 dmg to prog, destroys from deck");
  var scorpion=new prog("scorpion","scorp.png","antipersonel",2,6,2,2,15,"netrunner move -1d6 for hour. min1");
  var skunk=new prog("skunk","skun.png","antipersonel",2,4,4,2,10, "until drezzed, slide at -2 can stack");
- var wisp=new prog("wisp","wis.png", "antipersonel"4,4,4,2,15, "does 1d6 lowers net action next turn, min 2");
+ var wisp=new prog("wisp","wis.png", "antipersonel", 4,4,4,2,15, "does 1d6 lowers net action next turn, min 2");
  var liche=new prog("liche","lich.png", "antipersonel",8,2,6,2,25, "int dex ref lowered 1d6 for hour");
  var dragon=new prog("dragon","drag.png","antiprog", 6,4,6,6,30,"6d6 to rezzed program destroyed in deck");
  var giant=new prog("giant","gian.png","antipersonel", 2,2,8,4,25, "3d6 forcibly jacked out");
@@ -77,3 +77,27 @@ function arcstruct(rooms,totalbranch){
 
 }
 
+
+function plat(nambo){
+
+document.getElementById("demo").innerHTML=
+    `<div class="programbar">
+    <div class="icopng">${nambo.icon}</div>
+    <div class="rightbox">
+      <div class="proname">${nambo.name}</div>
+      <div class="stat">per ${nambo.per}</div>
+      <div class="stat">spd ${nambo.spd}</div>
+      <div class="stat">att ${nambo.atk}</div>
+      <div class="stat">def ${nambo.def}</div>
+      <div class="stat">rez ${nambo.rez}</div>
+      <div class="clear"></div>
+      <div class="typi">type 
+        <span class="typ">${nambo.type}</span>
+      </div>
+
+    </div>
+    <div class="efboxright">effect ${nambo.eff}</div>
+
+  </div>`
+    
+}

@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <head>
+    <link rel="stylesheet" href="jon.css">
+  </head>
+<body style="background: blue;">
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script type="text/javascript" src="narc.js"></script>
+    
 
 <h2>JavaScript Math</h2>
+<svg><circle r="40" cx="50" cy="50" fill="white" style="filter: url(#red-glow);"></circle></svg>>
 
 <p>Math.floor(Math.random() * 10) returns a random integer between 0 and 9 (both 
 included):</p>
 
 <p>Number of Floors =<span id="demo"></span></p>
 <p>Number of branches =<span id="lemo"></span></p>
+
+
+
 
 <script>
 function dsix(){
@@ -44,8 +54,84 @@ function conode(icon, dv) {
 }
 
 document.getElementById("demo").innerHTML = floors;
-document.getElementById("lemo").innerHTML = bri2
+document.getElementById("lemo").innerHTML = hellhound.icon;
+plat(hellhound);
+
+
+
+
+
+ 
+
+
+
+
 </script>
+
+<svg viewBox="0 0 400 400" style="width:400px;">
+    <defs>
+      <filter id="red-glow" filterUnits="userSpaceOnUse"
+              x="-50%" y="-50%" width="200%" height="200%">
+         
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur5"/>
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur10"/>
+        <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur20"/>
+        <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="blur30"/>
+        <feGaussianBlur in="SourceGraphic" stdDeviation="50" result="blur50"/>
+        
+        <feMerge result="blur-merged">
+          <feMergeNode in="blur10"/>
+          <feMergeNode in="blur20"/>
+          <feMergeNode in="blur30"/>
+          <feMergeNode in="blur50"/>
+        </feMerge>
+        
+        <feColorMatrix result="red-blur" in="blur-merged" type="matrix"
+                       values="1 0 0 0 0
+                               0 0.06 0 0 0
+                               0 0 0.44 0 0
+                               0 0 0 1 0" />
+        <feMerge>
+          <feMergeNode in="red-blur"/>       
+          <feMergeNode in="blur5"/>          
+          <feMergeNode in="SourceGraphic"/>  
+        </feMerge>
+      </filter>
+    </defs>
+  
+    <text x="200" y="200" text-anchor="middle"
+    
+    style="font-family: Helvetica, Arial, sansserif;
+    font-size: 100px;
+    font-weight: 900;
+    fill: white;
+    filter: url(#red-glow);">
+      RED</text>
+  </svg>
+
+  <div class="programbar">
+    <div class="icopng"></div>
+    <div class="rightbox">
+      <div class="proname">Name</div>
+      <div class="stat">per</div>
+      <div class="stat">spd</div>
+      <div class="stat">att</div>
+      <div class="stat">def</div>
+      <div class="stat">rez</div>
+      <div class="clear"></div>
+      <div class="typi">type
+        <span class=typ></span>
+      </div>
+
+    </div>
+    <div class="efboxright">effect</div>
+
+  </div>
+  <div id="ergo"></div>
+
+  <script type="text/javascript" src="narc.js"></script>
+  
+
 
 </body>
 </html>

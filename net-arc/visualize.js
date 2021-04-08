@@ -1,3 +1,34 @@
+//d3.select("#codeplane")
+ // .transition()
+  //.duration(2000)
+  //.attr("transform", "scale(.5 .5)")
+
+function plat(nambo){
+
+    document.getElementById("info").innerHTML+=
+        `
+    <div class="programbar">
+        <div class="icopng" style="background-image: url('images/${nambo.icon}');"></div>
+        <div class="rightbox">
+          <div class="proname">${nambo.name}</div>
+          <div class="stat">per</br>${nambo.per}</div>
+          <div class="stat">spd</br>${nambo.spd}</div>
+          <div class="stat">att</br>${nambo.atk}</div>
+          <div class="stat">def</br>${nambo.def}</div>
+          <div class="stat">rez</br>${nambo.rez}</div>
+          <div class="clear"></div>
+          <div class="typi">type 
+            <span class="typ">${nambo.type}</span></div>
+    
+        </div>
+        <div class="efboxright">effect</br> ${nambo.eff}</div>
+    
+    </div><div class="clear"></div>`
+  }
+
+  
+
+
 
 function renderData(data) {
     console.log(data);
@@ -29,7 +60,7 @@ function renderData(data) {
 
     const simulation = d3.forceSimulation(data.nodes)
         .force("link", d3.forceLink(data.links).id(d => d.id))
-        .force("charge", d3.forceManyBody().strength(-300))
+        .force("charge", d3.forceManyBody().strength(0))
         .force("x", d3.forceX())
         .force("y", d3.forceY())
         .force('collide', d3.forceCollide(d => 130))
@@ -99,6 +130,8 @@ function renderData(data) {
 
     var circles = node.append("circle")
         .attr("r", 50)
+        .style("filter", "url(#red-glow)")
+       
         .attr("fill", d => nodeColor(d.type));
 
        // var clipPaths = node.append("clipPath")
@@ -112,6 +145,7 @@ function renderData(data) {
         .attr("y", function (d) { return -50; })
         .attr("width", 100)
         .attr("height", 100)
+        
         // .attr("clip-path", function (d) { return "url(#clip-circle-" + d.id + ")" })
         //.attr("width", function (d) { return d.landscape ? null : 100 })
         //.attr("height", function (d) { return d.landscape ? 100 : null });
@@ -133,7 +167,15 @@ function renderData(data) {
               .attr("y", -50)
               .attr("width", 100)
               .attr("height", 100)
-          });
+          })
+        .on('click', function(x,d){
+            document.getElementById('info').innerHTML =""
+           for (var b=0;b<d.contents.length; b++){
+               plat(window[d.contents[b].type])
+           }
+            
+        }) 
+        ;
 
 
     node.append("text")
@@ -145,3 +187,9 @@ function renderData(data) {
         .attr("stroke", "white")
         .attr("stroke-width", 3);
 }
+
+
+
+
+
+

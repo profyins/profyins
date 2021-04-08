@@ -9,7 +9,7 @@ var tables = {
     },
     basic: {
         3: [{ type: "hellhound" }],
-        4: [{ type: "sabertooth" }],
+        4: [{ type: "sabretooth" }],
         5: [{ type: "raven" }, { type: "raven" }],
         6: [{ type: "hellhound" }],
         7: [{ type: "wisp" }],
@@ -20,14 +20,14 @@ var tables = {
         12: [{ type: "password", dv: 6 }],
         13: [{ type: "skunk" }],
         14: [{ type: "asp" }],
-        15: [{ type: "scorpian" }],
+        15: [{ type: "scorpion" }],
         16: [{ type: "killer" }, { type: "skunk" }],
         17: [{ type: "wisp" }, { type: "wisp" }, { type: "wisp" }],
-        18: [{ type: "lich" }]
+        18: [{ type: "liche" }]
     },
     standard: {
         3: [{ type: "hellhound" }],
-        4: [{ type: "sabertooth" }],
+        4: [{ type: "sabretooth" }],
         5: [{ type: "raven" }, { type: "raven" }],
         6: [{ type: "hellhound" }],
         7: [{ type: "wisp" }],
@@ -38,14 +38,14 @@ var tables = {
         12: [{ type: "password", dv: 6 }],
         13: [{ type: "skunk" }],
         14: [{ type: "asp" }],
-        15: [{ type: "scorpian" }],
+        15: [{ type: "scorpion" }],
         16: [{ type: "killer" }, { type: "skunk" }],
         17: [{ type: "wisp" }, { type: "wisp" }, { type: "wisp" }],
-        18: [{ type: "lich" }]
+        18: [{ type: "liche" }]
     },
     uncommon: {
         3: [{ type: "hellhound" }],
-        4: [{ type: "sabertooth" }],
+        4: [{ type: "sabretooth" }],
         5: [{ type: "raven" }, { type: "raven" }],
         6: [{ type: "hellhound" }],
         7: [{ type: "wisp" }],
@@ -56,14 +56,14 @@ var tables = {
         12: [{ type: "password", dv: 6 }],
         13: [{ type: "skunk" }],
         14: [{ type: "asp" }],
-        15: [{ type: "scorpian" }],
+        15: [{ type: "scorpion" }],
         16: [{ type: "killer" }, { type: "skunk" }],
         17: [{ type: "wisp" }, { type: "wisp" }, { type: "wisp" }],
-        18: [{ type: "lich" }]
+        18: [{ type: "liche" }]
     },
     advanced: {
         3: [{ type: "hellhound" }],
-        4: [{ type: "sabertooth" }],
+        4: [{ type: "sabretooth" }],
         5: [{ type: "raven" }, { type: "raven" }],
         6: [{ type: "hellhound" }],
         7: [{ type: "wisp" }],
@@ -74,12 +74,45 @@ var tables = {
         12: [{ type: "password", dv: 6 }],
         13: [{ type: "skunk" }],
         14: [{ type: "asp" }],
-        15: [{ type: "scorpian" }],
+        15: [{ type: "scorpion" }],
         16: [{ type: "killer" }, { type: "skunk" }],
         17: [{ type: "wisp" }, { type: "wisp" }, { type: "wisp" }],
-        18: [{ type: "lich" }]
+        18: [{ type: "liche" }]
     }
 };
+
+
+var pasz ={icon:"pass.png",dv:["dv6","dv8","dv10","dv12"]};
+var filz ={icon:"file.png",dv:["dv6","dv8","dv10","dv12"]};
+var conode ={icon:"conode.png",dv:["dv6","dv8","dv10","dv12"]};
+
+function prog(name, icon, type, per, spd, atk, def, rez, eff) {
+    this.name=name;
+    this.icon = icon;
+    this.type= type;
+    this.per=per;
+    this.spd=spd;
+    this.atk=atk;
+    this.def=def;
+    this.rez=rez;
+    this.eff=eff;
+}
+var hellhound =new prog("hellhound","prored.svg","antipersonel",6,6,6,2,20,"2d6 dmg, catch fire, 2dmg");
+ var sabretooth =new prog("sabretooth","sabr.png","antiprog",8,6,6,2,25, "6d6 dmg to prg, removed prog");
+ var raven=new prog("raven","rav.png", "antipersonel",6,4,4,2,15, "derez a rezzed def then 1d6");
+ var asp=new prog("asp","asp.png","antipersonel",4,6,2,2,15, "destroy 1 prg on deck");
+ var killer=new prog("killer","kllr.png","antiprog",4,8,6,2,20,"4d6 dmg to prog, destroys from deck");
+ var scorpion=new prog("scorpion","scorp.png","antipersonel",2,6,2,2,15,"netrunner move -1d6 for hour. min1");
+ var skunk=new prog("skunk","skun.png","antipersonel",2,4,4,2,10, "until drezzed, slide at -2 can stack");
+ var wisp=new prog("wisp","wis.png", "antipersonel", 4,4,4,2,15, "does 1d6 lowers net action next turn, min 2");
+ var liche=new prog("liche","lich.png", "antipersonel",8,2,6,2,25, "int dex ref lowered 1d6 for hour");
+ var dragon=new prog("dragon","drag.png","antiprog", 6,4,6,6,30,"6d6 to rezzed program destroyed in deck");
+ var giant=new prog("giant","gian.png","antipersonel", 2,2,8,4,25, "3d6 forcibly jacked out");
+ var kraken=new prog("kraken","krak.png","antipersonel",6,2,8,4,"3d6 cant move or jack out till next turn")
+var progz ={hellhound,sabretooth,raven,asp,killer,scorpion,skunk,wisp,liche,dragon,giant,kraken};
+
+
+
 
 function die(sides) {
     return Math.floor(Math.random() * sides) + 1

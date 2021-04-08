@@ -3,13 +3,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="net-arc.css">
-  <title>Net Arc test</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet"> 
+  <title>Net</title>
+<style>
+body {
+
+  font-family: 'Teko';
+  color: white;
+}
+</style>
 </head>
 
 <body>
+  <aside class="sideui">
+    <div class="bo">
+      <div class="icotex">hellhound</div>
+      <svg width="90" height="90">
+        <image href="images/prored.svg" height="60" width="60" class="proicon"/>
+        
+
+      </svg>
+      
+    </div>
+    <div id ="gy">
+       <svg width="300" height="200"  style="filter: url(#red-glow);">
+       <image href="images/codeplane.svg" height="200" width="200" id="rota"/>
+
+       
+        <image href="images/prored.svg" height="60" width="60" class="proicon" x="40" y="40"/>
+        <image href="images/prored.svg" height="50" width="50" class="proicon" x="200" y="45"/>
+        <image href="images/problu.svg" height="30" width="30" id="proicon3" x="160" y="90"></image>
+          
+        
+
+          <text dy="70" textlength="200">
+            <textpath xlink: href="#proicon3">
+              pro test here
+            </textpath>
+          </text>
+        
+        
+       </svg>
+    </div>
+
+    <div id="info">
+      testing one
+    </div>
+  </aside>
+
   <main>
-    <h1>Net Arc test</h1>
+    
+    Net Arc test
     <div class="graph"></div>
+
+
+
+    <svg>
+      <defs>
+        <filter id="red-glow" filterUnits="userSpaceOnUse"
+                x="-50%" y="-50%" width="200%" height="200%">
+           
+          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur5"/>
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur10"/>
+          <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur20"/>
+          <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="blur30"/>
+          <feGaussianBlur in="SourceGraphic" stdDeviation="50" result="blur50"/>
+          
+          <feMerge result="blur-merged">
+            <feMergeNode in="blur10"/>
+            <feMergeNode in="blur20"/>
+            <feMergeNode in="blur30"/>
+            <feMergeNode in="blur50"/>
+          </feMerge>
+          
+          <feColorMatrix result="red-blur" in="blur-merged" type="matrix"
+                         values="1 0 0 0 0
+                                 0 0.06 0 0 0
+                                 0 0 0.44 0 0
+                                 0 0 0 1 0" />
+          <feMerge>
+            <feMergeNode in="red-blur"/>       
+            <feMergeNode in="blur5"/>          
+            <feMergeNode in="SourceGraphic"/>  
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
   </main>
 
   <script src="https://d3js.org/d3.v6.js"></script>

@@ -1,0 +1,45 @@
+.programbar{
+    color:cadetblue;
+
+}
+
+.icopng{
+    height: 70px;
+    width: 70px;
+    float:left;
+    border:solid yellow;
+}
+
+.rightbox{
+    float:left;
+    border: solid yellow;
+    
+}
+.proname{
+    height:30px;
+    border: solid orangered;
+
+}
+
+.stat {
+    height: 40px;
+    width: 40px;
+    float:left;
+    border:solid red ;
+}
+
+.clear{
+    clear:both;
+}
+.typi{
+    height:30px;
+    border:solid purple;
+}
+
+.efboxright{
+    position: relative;
+    float:left;
+    border:solid palegoldenrod;
+    height: 70px;
+    top: 5px;
+}

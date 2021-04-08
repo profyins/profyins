@@ -1,15 +1,14 @@
-* {
-	font-family: Arial, Helvetica, sans-serif;
-  }
+
   
   html, body {
 	margin: 0;
 	border: 0;
 	padding: 0;
-	background-color: #fff;
+	background-image: linear-gradient(to right, black , navy);
   }
   
   main {
+	  float:left;
 	margin: auto;
 	width: 50%;
 	padding: 20px;
@@ -19,3 +18,123 @@
 	text-align: center;
 	font-size: 3.5em;
   }
+  .circ {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: #fff;
+	box-shadow:
+	  0 0 60px 30px #fff,  /* inner white */
+	  0 0 100px 60px #f0f, /* middle magenta */
+	  0 0 140px 90px #0ff; /* outer cyan */
+  }
+
+  @keyframes example {
+   0% {transform: scale(2,2) rotateX(0deg);}
+ 100% {transform: scale(1.5,1.5)rotateX(60deg);}
+
+  }
+
+  @keyframes spinn{
+
+	0% {transform: rotate(0deg)}
+	100% {transform:rotate(90deg)}
+  }
+
+  @keyframes iconappear{
+	  0%   {transform:scale(.2,.2)} 
+	  20% {transform:scale(.3,5)}
+	  25% {transform:scale(5,.3)}
+	  30%   {transform:scale(.3,.3)}
+	  100%   {transform:scale(1,1)}
+  }
+
+#rota{
+	
+	transform:scale(1.5,1.5) rotatex(60deg);
+	position: relative;
+  
+  animation-name: example;
+  animation-duration: 5s;
+}
+
+#lcodeplane{
+	transform:rotate(90deg);
+	animation-name: spinn;
+	animation-duration: 3s;
+}
+
+.sideui{
+	float:right;
+	border: solid orangered;
+	z-index: 5;
+
+}
+
+.proicon{
+	transform:scale(1,1);
+	
+	float:right;
+	animation-name: iconappear;
+	animation-duration: 1s;
+	filter: url(#red-glow);
+	vertical-align: middle;
+}
+
+.icotex{
+
+	position:absolute;
+	top: 20px;
+}
+
+
+.programbar{
+	font-family: 'Audiowide', cursive;
+	font-size: small;
+    color:white;
+
+}
+
+.icopng{
+    height: 70px;
+    width: 70px;
+    float:left;
+    border:solid yellow;
+	background-size: contain;
+}
+
+.rightbox{
+    float:left;
+    border: solid yellow;
+    
+}
+.proname{
+    height:30px;
+    border: solid orangered;
+
+}
+
+.stat {
+	text-align: center;
+    height: 40px;
+    width: 40px;
+    float:left;
+    border:solid red ;
+}
+
+.clear{
+    clear:both;
+}
+.typi{
+    height:30px;
+    border:solid purple;
+}
+
+.efboxright{
+    position: relative;
+    float:left;
+    border:solid palegoldenrod;
+    height: 70px;
+	width:200px;
+    top: 5px;
+}
