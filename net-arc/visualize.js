@@ -26,6 +26,31 @@ function plat(nambo){
     </div><div class="clear"></div>`
   }
 
+  function lat(typo){
+      document.getElementById("info").innerHTML +=
+
+      `
+      <div class="programbar">
+          <div class="icopng" style="background-image: url('images/${typo}.svg');"></div>
+          <div class="rightbox">
+            <div class="proname">${typo.type}</div>
+            <div class="stat"></div>
+            <div class="stat"></div>
+            <div class="stat"></div>
+            <div class="stat"></div>
+            <div class="stat"></div>
+            <div class="clear"></div>
+            <div class="typi">DV
+              <span class="typ"> ->${typo.dv}</span></div>
+      
+          </div>
+          <div class="efboxright"></br></div>
+      
+      </div><div class="clear"></div>`
+
+
+  }
+
   
 
 
@@ -169,11 +194,26 @@ function renderData(data) {
               .attr("height", 100)
           })
         .on('click', function(x,d){
-            document.getElementById('info').innerHTML =""
-           for (var b=0;b<d.contents.length; b++){
-               plat(window[d.contents[b].type])
-           }
             
+            document.getElementById('info').innerHTML =""
+            if (d.type=="ice") {
+                for (var b=0;b<d.contents.length; b++){
+               plat(window[d.contents[b].type])
+                    }
+            
+            }
+            else if (d.type="password"){
+                lat(d.contents[0])
+
+            }
+            else if (d.type="file"){
+                lat(d.contents[0])
+
+            }
+            else if (d.type="control"){
+
+                lat(d.contents[0])
+            }
         }) 
         ;
 

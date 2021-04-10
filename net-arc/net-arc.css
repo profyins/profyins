@@ -66,7 +66,7 @@
 
 .sideui{
 	float:right;
-	border: solid orangered;
+	border:  orangered;
 	z-index: 5;
 
 }
@@ -99,18 +99,20 @@
     height: 70px;
     width: 70px;
     float:left;
-    border:solid yellow;
+    border: yellow;
 	background-size: contain;
 }
 
 .rightbox{
     float:left;
-    border: solid yellow;
+    border:  yellow;
     
 }
 .proname{
     height:30px;
-    border: solid orangered;
+    border:  orangered;
+	font-size:x-large;
+	color:cadetblue;
 
 }
 
@@ -119,7 +121,7 @@
     height: 40px;
     width: 40px;
     float:left;
-    border:solid red ;
+    border: red ;
 }
 
 .clear{
@@ -127,13 +129,13 @@
 }
 .typi{
     height:30px;
-    border:solid purple;
+    border: purple;
 }
 
 .efboxright{
     position: relative;
     float:left;
-    border:solid palegoldenrod;
+    border:palegoldenrod;
     height: 70px;
 	width:200px;
     top: 5px;

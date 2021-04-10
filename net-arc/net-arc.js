@@ -26,22 +26,22 @@ var tables = {
         18: [{ type: "liche" }]
     },
     standard: {
-        3: [{ type: "hellhound" }],
-        4: [{ type: "sabretooth" }],
-        5: [{ type: "raven" }, { type: "raven" }],
-        6: [{ type: "hellhound" }],
-        7: [{ type: "wisp" }],
-        8: [{ type: "raven" }],
-        9: [{ type: "password", dv: 6 }],
-        10: [{ type: "file", dv: 6 }],
-        11: [{ type: "control", dv: 6 }],
-        12: [{ type: "password", dv: 6 }],
-        13: [{ type: "skunk" }],
-        14: [{ type: "asp" }],
-        15: [{ type: "scorpion" }],
-        16: [{ type: "killer" }, { type: "skunk" }],
-        17: [{ type: "wisp" }, { type: "wisp" }, { type: "wisp" }],
-        18: [{ type: "liche" }]
+        3: [{ type: "hellhound" }, { type: "hellhound" }],
+        4: [{ type: "hellhound" }, { type: "killer" }],
+        5: [{ type: "skunk" }, { type: "skunk" }],
+        6: [{ type: "sabretooth" }],
+        7: [{ type: "scorpion" }],
+        8: [{ type: "hellhound" }],
+        9: [{ type: "password", dv: 8 }],
+        10: [{ type: "file", dv: 8 }],
+        11: [{ type: "control", dv: 8 }],
+        12: [{ type: "password", dv: 8 }],
+        13: [{ type: "asp" }],
+        14: [{ type: "killer" }],
+        15: [{ type: "liche" }],
+        16: [{ type: "asp" }],
+        17: [{ type: "raven" }, { type: "raven" }, { type: "raven" }],
+        18: [{ type: "liche" },{ type:"raven"}]
     },
     uncommon: {
         3: [{ type: "hellhound" }],
@@ -97,7 +97,7 @@ function prog(name, icon, type, per, spd, atk, def, rez, eff) {
     this.rez=rez;
     this.eff=eff;
 }
-var hellhound =new prog("hellhound","prored.svg","antipersonel",6,6,6,2,20,"2d6 dmg, catch fire, 2dmg");
+var hellhound =new prog("hellhound","prohell.svg","antipersonel",6,6,6,2,20,"2d6 dmg, catch fire, 2dmg");
  var sabretooth =new prog("sabretooth","sabr.png","antiprog",8,6,6,2,25, "6d6 dmg to prg, removed prog");
  var raven=new prog("raven","rav.png", "antipersonel",6,4,4,2,15, "derez a rezzed def then 1d6");
  var asp=new prog("asp","asp.png","antipersonel",4,6,2,2,15, "destroy 1 prg on deck");
