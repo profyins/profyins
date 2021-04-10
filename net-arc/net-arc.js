@@ -133,9 +133,10 @@ class Room {
         this.id = id;
         this.diffculty = diffculty;
         this.contents = [];
+        this.isLeaf = false;
     }
     populate(alreadyRolled) {
-        this.contents = rollContents(alreadyRolled, this.diffculty, 3)
+        this.contents = rollContents(alreadyRolled, this.diffculty, 3, this.isLeaf)
     }
 }
 
@@ -144,7 +145,7 @@ class LobbyRoom extends Room {
         super(diffculty, id);
     }
     populate(alreadyRolled) {
-        this.contents = rollContents(alreadyRolled, 'lobby', 1)
+        this.contents = rollContents(alreadyRolled, 'lobby', 1, this.isLeaf)
     }
 }
 
@@ -199,6 +200,7 @@ class Narc {
         //the root is always the last room in the mainBranch
         //////////////////////////////////////////////////////////////////////////
         this.root = mainBranch[mainBranch.length-1];
+        this.root.isLeaf = true;
 
         ////////////////////////////////////////////////////////////////////////////
         //for the side branches, create them now 
@@ -242,6 +244,8 @@ class Narc {
             const sideBranch = remainderBranches[r];
             //sometimes sideBranch is allocated but we run out of rooms before its populated
             if(sideBranch.length == 0){ continue; }
+            //last node in a branch is always a leaf
+            sideBranch[sideBranch.length - 1].isLeaf = true;
             const attachableRoomIndexs = [];
             //loop from 3rd room in main branch to determine where we can attach this sidebranch
             for (let i = 2; i < mainBranch.length; i++){
@@ -323,10 +327,13 @@ class Narc {
     } 
 }
 
-function rollContents(alreadyRolled, tableName, numDice) {
+function rollContents(alreadyRolled, tableName, numDice, isLeaf) {
     var roll = dice(numDice, 6)
     if (alreadyRolled[tableName][roll]) {
-        return rollContents(alreadyRolled, tableName, numDice);
+        return rollContents(alreadyRolled, tableName, numDice, isLeaf);
+    }
+    else if(isLeaf && tables[tableName][roll].type == 'password'){
+        return rollContents(alreadyRolled, tableName, numDice, isLeaf);
     }
     else {
         var result = tables[tableName][roll];
