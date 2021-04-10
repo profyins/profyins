@@ -1,6 +1,6 @@
 var autofire={smg:{},assault:{}};
-autofire.smg={range1:["0-6m",15],range2:["7-12m",13],range3:["13-25m",15],range4:["26-50m",20],range5:["51-100m",25]}
-autofire.assault={range1:["0-6m",17],range2:["7-12m",16],range3:["13-25m",15],range4:["26-50m",13],range5:["51-100m",15]}
+autofire.smg={range1:["0-6m",20],range2:["7-12m",17],range3:["13-25m",20],range4:["26-50m",25],range5:["51-100m",30]}
+autofire.assault={range1:["0-6m",22],range2:["7-12m",20],range3:["13-25m",17],range4:["26-50m",20],range5:["51-100m",25]}
 
 var specialstuf={
     rangevade:{title:"Ranged Evasion", desc:"A charachter with 8 or higher reflex can choose an opposed evasion check to evade ranged attacks."},
