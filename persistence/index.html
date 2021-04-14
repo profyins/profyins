@@ -53,7 +53,7 @@
 
             db.collection('somethings').add({ magic : data })
                 .then((d) => { 
-                    document.querySelector('#reference').innerHTML = window.location.origin + window.location.pathname + '?=' + d.id;
+                    document.querySelector('#reference').innerHTML = window.location.origin + window.location.pathname + '?id=' + d.id;
                 })
                 .catch((e) => { 
                     console.error('error: ' + e); 
