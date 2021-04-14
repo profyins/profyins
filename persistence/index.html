@@ -6,6 +6,21 @@
 </head>
 
 <body>
+    <main>
+        <div>
+            <input id="collector" placeholder="Input Data" type="text" />
+            <input id="sender" value="Save Data" type="button" />
+            <label id="reference"></label>
+        </div>
+        <hr />
+        <div>
+            <label id="detail"></label>
+        </div>
+        <hr />
+        <div>
+            <div id="list"></div>
+        </div>
+    </main>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
@@ -13,7 +28,7 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
     <script>
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -29,6 +44,42 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
+    </script>
+    <script>
+        var db = firebase.firestore();
+
+        document.querySelector('#sender').addEventListener('click', function (event) {
+            var data = document.querySelector('#collector').value;
+
+            db.collection('somethings').add({ magic : data })
+                .then((d) => { 
+                    document.querySelector('#reference').innerHTML = d.id;
+                })
+                .catch((e) => { 
+                    console.error('error: ' + e); 
+                });
+        });
+
+        var params = new URLSearchParams(window.location.search);
+        var id = params.get('id');
+        if (id) {
+
+            db.collection('somethings').doc(id).get()
+                .then((d) => { 
+                    var data = d.data();
+                    document.querySelector('#detail').innerHTML = data.magic;
+                });
+        }
+
+        var listContainer = document.querySelector("#list");
+        db.collection('somethings').get()
+            .then((ls) => { 
+                ls.forEach(item => {
+                    listContainer.innerHTML += '<div><a href="/persistence/?id='+ item.id+'">'+ item.id +'</a></div>';
+                })
+            });
+
+
     </script>
 </body>
 
