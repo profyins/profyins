@@ -75,7 +75,7 @@
         db.collection('somethings').get()
             .then((ls) => { 
                 ls.forEach(item => {
-                    listContainer.innerHTML += '<div><a href="persistence/?id='+ item.id+'">'+ item.id +'</a></div>';
+                    listContainer.innerHTML += '<div><a href="/?id='+ item.id+'">'+ item.id +'</a></div>';
                 })
             });
 
