@@ -1,0 +1,14 @@
+{
+    "name":"Release Test",
+    "title": "Release Test",
+    "author":"yinster",
+    "version": "1.0.0",
+    "minimumCoreVersion":"0.6.0",
+    "compatibleCoreVersion":"0.6.6",
+    "scripts":[
+        "init.js"
+    ],
+    "url": "",
+    "manifest": "",
+    "download":""
+}
