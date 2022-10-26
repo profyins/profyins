@@ -1,0 +1,76 @@
+{
+    "name": "edje-dreams",
+    "title": "Edje Dreams",
+    "description": "A collection of my content.",
+    "version": "1.0.0",
+    "author": "Me",
+    "authors": [
+        {
+            "name": "Author Name",
+            "discord": "Discord Handle",
+            "url": "https://website.com"
+        }
+    ],
+    "minimumCoreVersion": "0.8.6",
+    "compatibleCoreVersion": "9",
+    "compatibility": {
+        "minimum": 9,
+        "verified": "10.286"
+    },
+    "packs": [
+        {
+      "label": "Edgedreams actors",
+      "name": "edjedreams-actors",
+      "path": "packs/edgewatchactors.db",
+      "system": "pf2e",      
+      "entity": "Actor"
+     
+    },
+        {
+            "name": "module-items",
+            "label": "Module Items",
+            "path": "./packs/items.db",
+            "entity": "Item",
+            "type": "Item",
+            "system": "dnd5e"
+        },
+        {
+      "label": "Edjedreams scenes",      
+      "name": "edjedreams-scenes",
+      "path": "packs/edj-scenes.db",
+      "system": "pf2e",
+      "entity": "Scene"      
+    },
+        {
+      "label": "Edjedreams Journal",
+      "type": "JournalEntry",
+      "name": "edjedreams-journal",
+      "path": "packs/edj-journal.db",
+      "system": "pf2e",
+      "entity": "JournalEntry"
+    },
+        {
+            "name": "module-macros",
+            "label": "Module Macros",
+            "path": "./packs/macros.db",
+            "entity": "Macro",
+            "type": "Macro"
+        },
+        {
+            "name": "module-roll-tables",
+            "label": "Module Roll Tables",
+            "path": "./packs/roll-tables.db",
+            "entity": "RollTable",
+            "type": "RollTable"
+        },
+        {
+            "name": "module-playlists",
+            "label": "Module Playlists",
+            "path": "./packs/playlists.db",
+            "entity": "Playlist",
+            "type": "Playlist"
+        }
+    ],
+    "manifest": "https://github.com/profyins/profyins/blob/main/module.json",
+    "download": "https://github.com/profyins/profyins/blob/main/edje-dreams2.zip"
+  }
