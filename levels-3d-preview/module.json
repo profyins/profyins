@@ -110,4 +110,7 @@
     "minimum": "10",
     "verified": "10"
   }
+  
+  "manifest": "https://github.com/profyins/profyins/blob/main/levels-3d-preview/module.json",
+    "download": "https://github.com/profyins/profyins/blob/main/levels-3d-preview/levels-3d-preview.zip"
 }
